@@ -10,6 +10,7 @@ from api.models.profile import Profile
 from api.models.beer import Beer
 from api.models.shop import Shop
 from api.models.tasting import Tasting
+from api.models.shop import Association
 
 # ============ Import Views ============
 from api.views.auth import auth

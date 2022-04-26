@@ -1,6 +1,12 @@
 from datetime import datetime
 from api.models.db import db
 
+class Association(db.Model):
+    __tablename__ = 'associations'
+    id = db.Column(db.Integer, primary_key=True)
+    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id', ondelete='cascade'))
+    shop_id = db.Column(db.Integer, db.ForeignKey('shops.id', ondelete='cascade'))
+
 class Shop(db.Model):
     __tablename__ = 'shops'
     id = db.Column(db.Integer, primary_key=True)

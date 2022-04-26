@@ -6,12 +6,6 @@ from api.models.shop import Shop
 
 shops = Blueprint('shops', 'shops')
 
-class Association(db.Model):
-    __tablename__ = 'associations'
-    id = db.Column(db.Integer, primary_key=True)
-    beer_id = db.Column(db.Integer, db.ForeignKey('beers.id', ondelete='cascade'))
-    shop_id = db.Column(db.Integer, db.ForeignKey('shops.id', ondelete='cascade'))
-
 # create a shop
 @shops.route('/', methods=["POST"]) 
 @login_required
