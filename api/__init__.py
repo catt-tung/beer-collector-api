@@ -8,6 +8,7 @@ from config import Config
 from api.models.user import User
 from api.models.profile import Profile
 from api.models.beer import Beer
+from api.models.shop import Shop
 
 # ============ Import Views ============
 from api.views.auth import auth
