@@ -30,7 +30,24 @@ def show(id):
   beer_data = beer.serialize()
   return jsonify(beer=beer_data), 200
 
-#delete beer
+#update a beer
+@beers.route('/<id>', methods=["PUT"]) 
+@login_required
+def update(id):
+  data = request.get_json()
+  profile = read_token(request)
+  beer = Beer.query.filter_by(id=id).first()
+
+  if beer.profile_id != profile["id"]:
+    return 'Forbidden', 403
+
+  for key in data:
+    setattr(beer, key, data[key])
+
+  db.session.commit()
+  return jsonify(beer.serialize()), 200
+
+#delete a beer
 @beers.route('/<id>', methods=["DELETE"]) 
 @login_required
 def delete(id):
