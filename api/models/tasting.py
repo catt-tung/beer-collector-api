@@ -2,7 +2,7 @@ from datetime import datetime
 from api.models.db import db
 
 class Tasting(db.Model):
-    __tablename__ = 'feedings'
+    __tablename__ = 'tastings'
     id = db.Column(db.Integer, primary_key=True)
     shop = db.Column(db.String(100))
     impressions = db.Column(db.String(350))
@@ -11,7 +11,7 @@ class Tasting(db.Model):
     beer_id = db.Column(db.Integer, db.ForeignKey('beers.id'))
 
     def __repr__(self):
-      return f"Tasting('{self.id}', '{self.shop}', '{self.impressions}'"
+      return f"Tasting('{self.id}', '{self.shop}'"
 
     def serialize(self):
       return {

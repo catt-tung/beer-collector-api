@@ -3,6 +3,7 @@ from api.middleware import login_required, read_token
 
 from api.models.db import db
 from api.models.beer import Beer
+from api.models.tasting import Tasting
 
 beers = Blueprint('beers', 'beers')
 
@@ -60,3 +61,26 @@ def delete(id):
   db.session.delete(beer)
   db.session.commit()
   return jsonify(message="Success"), 200
+
+# tasting
+@beers.route('/<id>/tastings', methods=["POST"]) 
+@login_required
+def add_tasting(id):
+  data = request.get_json()
+  data["beer_id"] = id
+
+  profile = read_token(request)
+  beer = Beer.query.filter_by(id=id).first()
+
+  if beer.profile_id != profile["id"]:
+    return 'Forbidden', 403
+
+  tasting = Tasting(**data)
+  
+  db.session.add(tasting)
+  db.session.commit()
+
+  beer_data = beer.serialize()
+
+  return jsonify(beer_data), 201
+
