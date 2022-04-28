@@ -7,7 +7,7 @@ class Beer(db.Model):
     name = db.Column(db.String(100))
     style = db.Column(db.String(100))
     brewery = db.Column(db.String(100))
-    location = db.column(db.String(25))
+    location = db.Column(db.String(25))
     description = db.Column(db.String(250))
     abv = db.Column(db.String(5))
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
